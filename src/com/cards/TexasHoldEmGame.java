@@ -6,8 +6,8 @@ public class TexasHoldEmGame {
 	
 	/*
 	 *  There are three arguments, player one's pocket cards, player two's pocket cards, and the community board.
-	 *  The evaluator combines each player's card with the community board and determines which player can make the better poker hand with the community.
-	 *  e.g. if the parameters are "AC,AD" "Kd,Qs" "Ah,Kh,Qd,Qc,3h" (pocket Aces versus King Queen)
+	 *  The evaluator combines each player's cards with the community board and determines which player can make the better poker hand with the community board.
+	 *  e.g. if the parameters are "Ac,Ad" "Kd,Qs" "Ah,Kh,Qd,Qc,3h" (pocket Aces versus King Queen)
 	 *  The result looks like this:
 	 *      P1 has FullHouse, Aces full of Queens
 	 *      P2 has FullHouse, Queens full of Kings
