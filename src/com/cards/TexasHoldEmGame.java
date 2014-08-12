@@ -16,9 +16,13 @@ public class TexasHoldEmGame {
 	public static void main(String[] args) {
 		Hand p1Hand = findHandFromCardSet(convertToCardSet(args[0].trim(), args[2].trim()));
 		Hand p2Hand = findHandFromCardSet(convertToCardSet(args[1].trim(), args[2].trim()));
-		System.out.println("P1 has " + p1Hand.toString());
-		System.out.println("P2 has " + p2Hand.toString());
-		System.out.println((p1Hand.compareTo(p2Hand) > 0 ? "P1" : "P2") + " wins!");
+		System.out.println("Player one has " + p1Hand.toString());
+		System.out.println("Player two has " + p2Hand.toString());
+		if (p1Hand.compareTo(p2Hand) == 0) {
+			System.out.println("Player one has the same hand as player two!");
+		} else {
+			System.out.println((p1Hand.compareTo(p2Hand) > 0 ? "P1" : "P2") + " wins!");
+		}
 	}
 	
 }
