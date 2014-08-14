@@ -23,7 +23,7 @@ It's an eclipse project, just simply import the folder as a project.
 To run from the command line prompt, compile the project, then go to the bin directory, 
 and run the game using this syntax:
 
-java com.cards.TexasHoldEmGame <playerOneHand> <playerTwoHand> <communityBoard>
+java com.cards.TexasHoldEmGame *playerOneHand* *playerTwoHand* *communityBoard*
 
 All three parameters are a comma delimited list of cards. Each player should have two cards, and the 
 community board should hae five. (If you change the number of cards, I can't promise there won't be errors!)
