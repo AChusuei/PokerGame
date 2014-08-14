@@ -9,9 +9,15 @@ public class TexasHoldEmGame {
 	 *  The evaluator combines each player's cards with the community board and determines which player can make the better poker hand with the community board.
 	 *  e.g. if the parameters are "Ac,Ad" "Kd,Qs" "Ah,Kh,Qd,Qc,3h" (pocket Aces versus King Queen)
 	 *  The result looks like this:
-	 *      P1 has FullHouse, Aces full of Queens
-	 *      P2 has FullHouse, Queens full of Kings
-	 *      P1 wins!
+	 *      Player one has FullHouse, Aces full of Queens
+	 *      Player two has FullHouse, Queens full of Kings
+	 *      Player one wins!
+	 *      
+	 *  To indicate cards, cards are separated by commas, and each card consists of two characters.
+	 *  The first character is the rank, and can either be "A","K","Q","J","T"(ten),"9","8","7","6","5","4","3","2"
+	 *  The second is the suit, and can be either "s"(Spades), "c"(Clubs), "h"(Hearts), or "d" diamonds
+	 *  e.g. therefore, "5c" is the five of clubs, "Ad" is the Ace of diamonds
+	 *  
 	 */
 	public static void main(String[] args) {
 		Hand p1Hand = findHandFromCardSet(convertToCardSet(args[0].trim(), args[2].trim()));
@@ -21,7 +27,7 @@ public class TexasHoldEmGame {
 		if (p1Hand.compareTo(p2Hand) == 0) {
 			System.out.println("Player one has the same hand as player two!");
 		} else {
-			System.out.println((p1Hand.compareTo(p2Hand) > 0 ? "P1" : "P2") + " wins!");
+			System.out.println("Player " + (p1Hand.compareTo(p2Hand) > 0 ? "one" : "two") + " wins!");
 		}
 	}
 	
