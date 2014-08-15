@@ -28,7 +28,7 @@ public class TexasHoldEmPokerHandEvaluator {
 			// If we find straight with flush cards, we have a straight flush
 			Hand sfHand = findHighestStraight(new HashSet<Card>(flushCards)); 
 			if (sfHand != null) {
-				return Hand.StraightFlush(sfHand.primaryRank, suit);
+				return Hand.StraightFlush(sfHand.ranks.get(0), suit);
 			} else {
 				return Hand.Flush(flushCards, suit);
 			}

@@ -1,6 +1,6 @@
 package com.cards;
 
-public enum Rank {
+public enum Rank implements Comparable<Rank> {
 
 	Ace(14,'A'),
 	King(13,'K'),
@@ -24,5 +24,4 @@ public enum Rank {
 		this.value = value;
 		this.sn = shortName;
 	}
-	
 }

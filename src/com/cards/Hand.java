@@ -1,25 +1,23 @@
 package com.cards;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hand implements Comparable<Hand> {
 
 	final public HandRank handRank;
 	final public Suit suit;
-	final public Rank primaryRank;
-	final public Rank secondaryRank;
-	final public Rank thirdRank;
-	final public Rank fourthRank;
-	final public Rank fifthRank;
+	final public List<Rank> ranks;
 	
 	public Hand(HandRank handRank, Suit suit, Rank primaryRank, Rank secondaryRank, Rank thirdRank, Rank fourthRank, Rank fifthRank) {
 		this.handRank = handRank;
 		this.suit = suit;
-		this.primaryRank = primaryRank;
-		this.secondaryRank = secondaryRank;
-		this.thirdRank = thirdRank;
-		this.fourthRank = fourthRank;
-		this.fifthRank = fifthRank;
+		this.ranks = new ArrayList<Rank>();
+		ranks.add(primaryRank);
+		ranks.add(secondaryRank);
+		ranks.add(thirdRank);
+		ranks.add(fourthRank);
+		ranks.add(fifthRank);
 	}
 	
 	public static Hand HighCard(Rank primaryRank, Rank secondaryRank, Rank thirdRank, Rank fourthRank, Rank fifthRank) {
@@ -61,15 +59,15 @@ public class Hand implements Comparable<Hand> {
 	@Override 
 	public String toString() {
 		switch (handRank) {
-			case StraightFlush: return primaryRank + " high " + handRank + " of " + suit;
-			case FourOfAKind: return "Four " + primaryRank + "s, " + secondaryRank + " kicker";
-			case FullHouse: return handRank + ", " + primaryRank + "s full of " + secondaryRank + "s";
-			case Flush: return primaryRank + " high " + handRank + " of " + suit;
-			case Straight: return primaryRank + " high " + handRank;
-			case ThreeOfAKind: return "Three " + primaryRank + "s, " + secondaryRank.sn + thirdRank.sn + " kicker";
-			case TwoPair: return "Two pair, " + primaryRank + "s and " + secondaryRank + "s, " + thirdRank + " kicker";
-			case OnePair: return "One pair, " + primaryRank + "s, " + secondaryRank.sn + thirdRank.sn + fourthRank.sn + " kicker";
-			case HighCard: return primaryRank + " high (" + primaryRank.sn + secondaryRank.sn + thirdRank.sn + fourthRank.sn + fifthRank.sn + ")";
+			case StraightFlush: return ranks.get(0) + " high " + handRank + " of " + suit;
+			case FourOfAKind: return "Four " + ranks.get(0) + "s, " + ranks.get(1) + " kicker";
+			case FullHouse: return handRank + ", " + ranks.get(0) + "s full of " + ranks.get(1) + "s";
+			case Flush: return ranks.get(0) + " high " + handRank + " of " + suit;
+			case Straight: return ranks.get(0) + " high " + handRank;
+			case ThreeOfAKind: return "Three " + ranks.get(0) + "s, " + ranks.get(1).sn + ranks.get(2).sn + " kicker";
+			case TwoPair: return "Two pair, " + ranks.get(0) + "s and " + ranks.get(1) + "s, " + ranks.get(2) + " kicker";
+			case OnePair: return "One pair, " + ranks.get(0) + "s, " + ranks.get(1).sn + ranks.get(2).sn + ranks.get(3).sn + " kicker";
+			case HighCard: return ranks.get(0) + " high (" + ranks.get(0).sn + ranks.get(1).sn + ranks.get(2).sn + ranks.get(3).sn + ranks.get(4).sn + ")";
 			default: throw new RuntimeException("unknown hand rank: " + handRank);
 		}
 	}
@@ -78,27 +76,18 @@ public class Hand implements Comparable<Hand> {
 	public int compareTo(Hand that) {
 		int hr = this.handRank.value - that.handRank.value;
 		if (hr == 0) {
-			int one = this.primaryRank.value - that.primaryRank.value;
-			if (one == 0) {
-				int two = this.secondaryRank.value - that.secondaryRank.value;
-				if (two == 0) {
-					int three = this.thirdRank.value - that.thirdRank.value;
-					if (three == 0) {
-						int four = this.fourthRank.value - that.fourthRank.value;
-						if (four == 0) {
-							int five = this.fifthRank.value - that.fifthRank.value;
-							if (five == 0) return 0;
-							else return five;
-						}
-						return four;
-					}
-					return three;
+			for (int index = 0; index < this.ranks.size(); index++) {
+				int rankCompare = this.ranks.get(index).value - that.ranks.get(index).value;
+				if (rankCompare == 0) {
+					continue;
+				} else {
+					return rankCompare; 
 				}
-				return two;
 			}
-			return one;
-		} 
-		return hr;
+			return 0; 
+		} else {
+			return hr;
+		}
 	}
 	
 }

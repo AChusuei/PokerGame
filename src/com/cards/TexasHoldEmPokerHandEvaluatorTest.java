@@ -16,21 +16,21 @@ public class TexasHoldEmPokerHandEvaluatorTest {
 	public void determineHighestStraight_whenHandContainsAtoT_returnsAceHighStraight() {
 		Hand hand = findHighestStraight(fourFlushWithStraight());
 		assertEquals(HandRank.Straight, hand.handRank);
-		assertEquals(Rank.Ace, hand.primaryRank);
+		assertEquals(Rank.Ace, hand.ranks.get(0));
 	}
 	
 	@Test
 	public void determineHighestStraight_whenHandContainsJto7_returnsJackHighStraight() {
 		Hand hand = findHighestStraight(sixFlushWithStraight());
 		assertEquals(HandRank.Straight, hand.handRank);
-		assertEquals(Rank.Jack, hand.primaryRank);
+		assertEquals(Rank.Jack, hand.ranks.get(0));
 	}
 	
 	@Test
 	public void determineHighestStraight_whenHandContainsAto5_returnsWheelStraight() {
 		Hand hand = findHighestStraight(FourFlushWithWheelStraight());
 		assertEquals(HandRank.Straight, hand.handRank);
-		assertEquals(Rank.Five, hand.primaryRank);
+		assertEquals(Rank.Five, hand.ranks.get(0));
 	}
 	
 	@Test
@@ -62,198 +62,198 @@ public class TexasHoldEmPokerHandEvaluatorTest {
 	public void findHighestFlushOrStraight_whenFlushOrStraightPossible_returnsFlush() {
 		Hand hand = findHighestFlushOrStraight(sixFlushWithStraight());
 		assertEquals(HandRank.Flush, hand.handRank);
-		assertEquals(Rank.Jack, hand.primaryRank);
-		assertEquals(Rank.Ten, hand.secondaryRank);
-		assertEquals(Rank.Nine, hand.thirdRank);
-		assertEquals(Rank.Eight, hand.fourthRank);
-		assertEquals(Rank.Four, hand.fifthRank);
+		assertEquals(Rank.Jack, hand.ranks.get(0));
+		assertEquals(Rank.Ten, hand.ranks.get(1));
+		assertEquals(Rank.Nine, hand.ranks.get(2));
+		assertEquals(Rank.Eight, hand.ranks.get(3));
+		assertEquals(Rank.Four, hand.ranks.get(4));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenFourJacks_returnsFourOfaKind() {
 		Hand hand = findDuplicateTypeHand(quadsJacksWithTenKicker());
 		assertEquals(HandRank.FourOfAKind, hand.handRank);
-		assertEquals(Rank.Jack, hand.primaryRank);
-		assertEquals(Rank.Ten, hand.secondaryRank);
+		assertEquals(Rank.Jack, hand.ranks.get(0));
+		assertEquals(Rank.Ten, hand.ranks.get(1));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenThreeTensAndThreeTwosExist_returnsFullHouseTensOverTwos() {
 		Hand hand = findDuplicateTypeHand(tensFullWithThreeTwos());
 		assertEquals(HandRank.FullHouse, hand.handRank);
-		assertEquals(Rank.Ten, hand.primaryRank);
-		assertEquals(Rank.Two, hand.secondaryRank);
+		assertEquals(Rank.Ten, hand.ranks.get(0));
+		assertEquals(Rank.Two, hand.ranks.get(1));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenThreeFoursTwoJacksTwoKingsExist_returnsFullHouseFoursOverKings() {
 		Hand hand = findDuplicateTypeHand(foursFullWithTwoJacksAndTwoKings());
 		assertEquals(HandRank.FullHouse, hand.handRank);
-		assertEquals(Rank.Four, hand.primaryRank);
-		assertEquals(Rank.King, hand.secondaryRank);
+		assertEquals(Rank.Four, hand.ranks.get(0));
+		assertEquals(Rank.King, hand.ranks.get(1));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenThreeSevensAndAceKingExist_returnsTripSevenswithAKKickers() {
 		Hand hand = findDuplicateTypeHand(threeSevensAndAceKing());
 		assertEquals(HandRank.ThreeOfAKind, hand.handRank);
-		assertEquals(Rank.Three, hand.primaryRank);
-		assertEquals(Rank.Ace, hand.secondaryRank);
-		assertEquals(Rank.King, hand.thirdRank);
+		assertEquals(Rank.Three, hand.ranks.get(0));
+		assertEquals(Rank.Ace, hand.ranks.get(1));
+		assertEquals(Rank.King, hand.ranks.get(2));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenThreePairsExist_returnsHighestTwoPair() {
 		Hand hand = findDuplicateTypeHand(twoKingsTwoQueensTwoJacksSix());
 		assertEquals(HandRank.TwoPair, hand.handRank);
-		assertEquals(Rank.King, hand.primaryRank);
-		assertEquals(Rank.Queen, hand.secondaryRank);
-		assertEquals(Rank.Jack, hand.thirdRank);
+		assertEquals(Rank.King, hand.ranks.get(0));
+		assertEquals(Rank.Queen, hand.ranks.get(1));
+		assertEquals(Rank.Jack, hand.ranks.get(2));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenTwoPairsExist_returnsTwoPairPlusHighestKicker() {
 		Hand hand = findDuplicateTypeHand(twoSixesTwoFoursAceKicker());
 		assertEquals(HandRank.TwoPair, hand.handRank);
-		assertEquals(Rank.Six, hand.primaryRank);
-		assertEquals(Rank.Four, hand.secondaryRank);
-		assertEquals(Rank.Ace, hand.thirdRank);
+		assertEquals(Rank.Six, hand.ranks.get(0));
+		assertEquals(Rank.Four, hand.ranks.get(1));
+		assertEquals(Rank.Ace, hand.ranks.get(2));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenOnePairExists_returnsOnePairPlusHighestKicker() {
 		Hand hand = findDuplicateTypeHand(twoEightsPlusQueenTenSevenKicker());
 		assertEquals(HandRank.OnePair, hand.handRank);
-		assertEquals(Rank.Eight, hand.primaryRank);
-		assertEquals(Rank.Queen, hand.secondaryRank);
-		assertEquals(Rank.Ten, hand.thirdRank);
-		assertEquals(Rank.Seven, hand.fourthRank);
+		assertEquals(Rank.Eight, hand.ranks.get(0));
+		assertEquals(Rank.Queen, hand.ranks.get(1));
+		assertEquals(Rank.Ten, hand.ranks.get(2));
+		assertEquals(Rank.Seven, hand.ranks.get(3));
 	}
 	
 	@Test
 	public void findDuplicateTypeHand_whenNoPairExists_returnsHighCardHand() {
 		Hand hand = findDuplicateTypeHand(kingQueenNineSixFourThreeTwo());
 		assertEquals(HandRank.HighCard, hand.handRank);
-		assertEquals(Rank.King, hand.primaryRank);
-		assertEquals(Rank.Queen, hand.secondaryRank);
-		assertEquals(Rank.Nine, hand.thirdRank);
-		assertEquals(Rank.Six, hand.fourthRank);
-		assertEquals(Rank.Four, hand.fifthRank);
+		assertEquals(Rank.King, hand.ranks.get(0));
+		assertEquals(Rank.Queen, hand.ranks.get(1));
+		assertEquals(Rank.Nine, hand.ranks.get(2));
+		assertEquals(Rank.Six, hand.ranks.get(3));
+		assertEquals(Rank.Four, hand.ranks.get(4));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenHandContainsAtoT_returnsAceHighStraight() {
 		Hand hand = findHandFromCardSet(fourFlushWithStraight());
 		assertEquals(HandRank.Straight, hand.handRank);
-		assertEquals(Rank.Ace, hand.primaryRank);
+		assertEquals(Rank.Ace, hand.ranks.get(0));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenHandContainsBothStraightAndFlush_returnsJackHighFlush() {
 		Hand hand = findHandFromCardSet(sixFlushWithStraight());
 		assertEquals(HandRank.Flush, hand.handRank);
-		assertEquals(Rank.Jack, hand.primaryRank);
+		assertEquals(Rank.Jack, hand.ranks.get(0));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenHandContainsAto5_returnsWheelStraight() {
 		Hand hand = findHandFromCardSet(FourFlushWithWheelStraight());
 		assertEquals(HandRank.Straight, hand.handRank);
-		assertEquals(Rank.Five, hand.primaryRank);
+		assertEquals(Rank.Five, hand.ranks.get(0));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenFlushOrStraightPossible_returnsFlush() {
 		Hand hand = findHandFromCardSet(sixFlushWithStraight());
 		assertEquals(HandRank.Flush, hand.handRank);
-		assertEquals(Rank.Jack, hand.primaryRank);
-		assertEquals(Rank.Ten, hand.secondaryRank);
-		assertEquals(Rank.Nine, hand.thirdRank);
-		assertEquals(Rank.Eight, hand.fourthRank);
-		assertEquals(Rank.Four, hand.fifthRank);
+		assertEquals(Rank.Jack, hand.ranks.get(0));
+		assertEquals(Rank.Ten, hand.ranks.get(1));
+		assertEquals(Rank.Nine, hand.ranks.get(2));
+		assertEquals(Rank.Eight, hand.ranks.get(3));
+		assertEquals(Rank.Four, hand.ranks.get(4));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenFourJacks_returnsFourOfaKind() {
 		Hand hand = findHandFromCardSet(quadsJacksWithTenKicker());
 		assertEquals(HandRank.FourOfAKind, hand.handRank);
-		assertEquals(Rank.Jack, hand.primaryRank);
-		assertEquals(Rank.Ten, hand.secondaryRank);
+		assertEquals(Rank.Jack, hand.ranks.get(0));
+		assertEquals(Rank.Ten, hand.ranks.get(1));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenThreeTensAndThreeTwosExist_returnsFullHouseTensOverTwos() {
 		Hand hand = findHandFromCardSet(tensFullWithThreeTwos());
 		assertEquals(HandRank.FullHouse, hand.handRank);
-		assertEquals(Rank.Ten, hand.primaryRank);
-		assertEquals(Rank.Two, hand.secondaryRank);
+		assertEquals(Rank.Ten, hand.ranks.get(0));
+		assertEquals(Rank.Two, hand.ranks.get(1));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenThreeFoursTwoJacksTwoKingsExist_returnsFullHouseFoursOverKings() {
 		Hand hand = findHandFromCardSet(foursFullWithTwoJacksAndTwoKings());
 		assertEquals(HandRank.FullHouse, hand.handRank);
-		assertEquals(Rank.Four, hand.primaryRank);
-		assertEquals(Rank.King, hand.secondaryRank);
+		assertEquals(Rank.Four, hand.ranks.get(0));
+		assertEquals(Rank.King, hand.ranks.get(1));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenThreeSevensAndAceKingExist_returnsTripSevenswithAKKickers() {
 		Hand hand = findHandFromCardSet(threeSevensAndAceKing());
 		assertEquals(HandRank.ThreeOfAKind, hand.handRank);
-		assertEquals(Rank.Three, hand.primaryRank);
-		assertEquals(Rank.Ace, hand.secondaryRank);
-		assertEquals(Rank.King, hand.thirdRank);
+		assertEquals(Rank.Three, hand.ranks.get(0));
+		assertEquals(Rank.Ace, hand.ranks.get(1));
+		assertEquals(Rank.King, hand.ranks.get(2));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenThreePairsExist_returnsHighestTwoPair() {
 		Hand hand = findHandFromCardSet(twoKingsTwoQueensTwoJacksSix());
 		assertEquals(HandRank.TwoPair, hand.handRank);
-		assertEquals(Rank.King, hand.primaryRank);
-		assertEquals(Rank.Queen, hand.secondaryRank);
-		assertEquals(Rank.Jack, hand.thirdRank);
+		assertEquals(Rank.King, hand.ranks.get(0));
+		assertEquals(Rank.Queen, hand.ranks.get(1));
+		assertEquals(Rank.Jack, hand.ranks.get(2));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenTwoPairsExist_returnsTwoPairPlusHighestKicker() {
 		Hand hand = findHandFromCardSet(twoSixesTwoFoursAceKicker());
 		assertEquals(HandRank.TwoPair, hand.handRank);
-		assertEquals(Rank.Six, hand.primaryRank);
-		assertEquals(Rank.Four, hand.secondaryRank);
-		assertEquals(Rank.Ace, hand.thirdRank);
+		assertEquals(Rank.Six, hand.ranks.get(0));
+		assertEquals(Rank.Four, hand.ranks.get(1));
+		assertEquals(Rank.Ace, hand.ranks.get(2));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenOnePairExists_returnsOnePairPlusHighestKicker() {
 		Hand hand = findHandFromCardSet(twoEightsPlusQueenTenSevenKicker());
 		assertEquals(HandRank.OnePair, hand.handRank);
-		assertEquals(Rank.Eight, hand.primaryRank);
-		assertEquals(Rank.Queen, hand.secondaryRank);
-		assertEquals(Rank.Ten, hand.thirdRank);
-		assertEquals(Rank.Seven, hand.fourthRank);
+		assertEquals(Rank.Eight, hand.ranks.get(0));
+		assertEquals(Rank.Queen, hand.ranks.get(1));
+		assertEquals(Rank.Ten, hand.ranks.get(2));
+		assertEquals(Rank.Seven, hand.ranks.get(3));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenNoPairExists_returnsHighCardHand() {
 		Hand hand = findHandFromCardSet(kingQueenNineSixFourThreeTwo());
 		assertEquals(HandRank.HighCard, hand.handRank);
-		assertEquals(Rank.King, hand.primaryRank);
-		assertEquals(Rank.Queen, hand.secondaryRank);
-		assertEquals(Rank.Nine, hand.thirdRank);
-		assertEquals(Rank.Six, hand.fourthRank);
-		assertEquals(Rank.Four, hand.fifthRank);
+		assertEquals(Rank.King, hand.ranks.get(0));
+		assertEquals(Rank.Queen, hand.ranks.get(1));
+		assertEquals(Rank.Nine, hand.ranks.get(2));
+		assertEquals(Rank.Six, hand.ranks.get(3));
+		assertEquals(Rank.Four, hand.ranks.get(4));
 	}
 	
 	@Test
 	public void findHandFromCardSet_whenThreeFoursAndFlushExist_returnsFlush() {
 		Hand hand = findHandFromCardSet(threeFoursWithFlush());
 		assertEquals(HandRank.Flush, hand.handRank);
-		assertEquals(Rank.Nine, hand.primaryRank);
-		assertEquals(Rank.Six, hand.secondaryRank);
-		assertEquals(Rank.Four, hand.thirdRank);
-		assertEquals(Rank.Three, hand.fourthRank);
-		assertEquals(Rank.Two, hand.fifthRank);
+		assertEquals(Rank.Nine, hand.ranks.get(0));
+		assertEquals(Rank.Six, hand.ranks.get(1));
+		assertEquals(Rank.Four, hand.ranks.get(2));
+		assertEquals(Rank.Three, hand.ranks.get(3));
+		assertEquals(Rank.Two, hand.ranks.get(4));
 	}
 	
 	private void assertFlushOfSize(List<Card> cardList, int number) {
