@@ -64,10 +64,10 @@ public class Hand implements Comparable<Hand> {
 			case FullHouse: return handRank + ", " + ranks.get(0) + "s full of " + ranks.get(1) + "s";
 			case Flush: return ranks.get(0) + " high " + handRank + " of " + suit;
 			case Straight: return ranks.get(0) + " high " + handRank;
-			case ThreeOfAKind: return "Three " + ranks.get(0) + "s, " + ranks.get(1).sn + ranks.get(2).sn + " kicker";
+			case ThreeOfAKind: return "Three " + ranks.get(0) + "s, " + ranks.get(1).shortName + ranks.get(2).shortName + " kicker";
 			case TwoPair: return "Two pair, " + ranks.get(0) + "s and " + ranks.get(1) + "s, " + ranks.get(2) + " kicker";
-			case OnePair: return "One pair, " + ranks.get(0) + "s, " + ranks.get(1).sn + ranks.get(2).sn + ranks.get(3).sn + " kicker";
-			case HighCard: return ranks.get(0) + " high (" + ranks.get(0).sn + ranks.get(1).sn + ranks.get(2).sn + ranks.get(3).sn + ranks.get(4).sn + ")";
+			case OnePair: return "One pair, " + ranks.get(0) + "s, " + ranks.get(1).shortName + ranks.get(2).shortName + ranks.get(3).shortName + " kicker";
+			case HighCard: return ranks.get(0) + " high (" + ranks.get(0).shortName + ranks.get(1).shortName + ranks.get(2).shortName + ranks.get(3).shortName + ranks.get(4).shortName + ")";
 			default: throw new RuntimeException("unknown hand rank: " + handRank);
 		}
 	}

@@ -18,10 +18,20 @@ public enum Rank implements Comparable<Rank> {
 	Null(0,'0');
 	
 	public final int value;
-	public final char sn;
+	public final char shortName;
 	
 	private Rank(int value, char shortName) {
 		this.value = value;
-		this.sn = shortName;
+		this.shortName = shortName;
+	}
+	
+	public static Rank getRank(String r) {
+		char test = r.charAt(0);
+		for (Rank rank : Rank.values()) {
+			if (rank.shortName == test) {
+				return rank;
+			}
+		}
+	    throw new RuntimeException("Rank not recognized!!!");
 	}
 }
