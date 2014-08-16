@@ -1,14 +1,8 @@
 package com.cards;
 
 import static org.junit.Assert.*;
-import static com.cards.TexasHoldEmPokerHandEvaluator.*;
-
-import java.util.List;
-import java.util.Set;
 
 import org.junit.Test;
-
-import com.cards.Card;
 
 public class HandTest {
 

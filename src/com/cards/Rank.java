@@ -2,6 +2,7 @@ package com.cards;
 
 public enum Rank implements Comparable<Rank> {
 
+	// Note that this enum ordering enables the natural sorting of ranks to go from high to low.  
 	Ace(14,'A'),
 	King(13,'K'),
 	Queen(12,'Q'),

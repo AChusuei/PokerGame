@@ -29,11 +29,9 @@ public class Card implements Comparable<Card> {
 		}
 	}
 
-	@Override // reverse order sort 
+	@Override // Note this will use the natural reverse order sort of Rank
 	public int compareTo(Card that) {
-		if (this.rank.value < that.rank.value) return 1;
-		if (this.rank.value > that.rank.value) return -1;
-		return 0;
+		return this.rank.compareTo(that.rank);
 	}
 
 	@Override
