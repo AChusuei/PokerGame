@@ -20,6 +20,16 @@ public class Hand implements Comparable<Hand> {
 		ranks.add(fifthRank);
 	}
 	
+	public Hand(HandRank handRank, Suit suit, List<Rank> ranks) {
+		this.handRank = handRank;
+		this.suit = suit;
+		this.ranks = ranks;
+	}
+	
+	public static Hand HighCard(List<Rank> ranks) {
+		return new Hand(HandRank.HighCard, null, ranks);
+	}
+	
 	public static Hand HighCard(Rank primaryRank, Rank secondaryRank, Rank thirdRank, Rank fourthRank, Rank fifthRank) {
 		return new Hand(HandRank.HighCard, null, primaryRank, secondaryRank, thirdRank, fourthRank, fifthRank);
 	}

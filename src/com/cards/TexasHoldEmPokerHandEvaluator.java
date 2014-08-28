@@ -57,7 +57,7 @@ public class TexasHoldEmPokerHandEvaluator {
 			if (straight.size() == 5) {
 				return Hand.Straight(straight.get(0));
 			}
-			// Check for wheel 
+			// Check for wheel (A,2,3,4,5 straight)
 			if (straight.size() == 4 && straight.get(0) == Rank.Five && containsAce) {
 				return Hand.Straight(Rank.Five);
 			}
@@ -108,7 +108,7 @@ public class TexasHoldEmPokerHandEvaluator {
     	if (stats.tripsList.size() > 0) {
     		Rank tripsRank = stats.tripsList.get(0);
     		if (stats.tripsList.size() > 1) {
-    			// if there's another trips here, by definition there can't be other pairs.
+    			// if there's another set of trips here, by definition there can't be other pairs.
     			Rank fhPair = stats.tripsList.get(1);
     			return Hand.FullHouse(tripsRank, fhPair);
     		} else {
