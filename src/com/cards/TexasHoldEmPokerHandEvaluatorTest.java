@@ -323,7 +323,4 @@ public class TexasHoldEmPokerHandEvaluatorTest {
 	private Set<Card> threeFoursWithFlush() {
 		return convertToCardSet("3D,6D,2D,4S,4D,4C,9D");
 	}
-	
-	
-	
 }

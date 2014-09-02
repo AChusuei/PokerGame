@@ -20,6 +20,26 @@ public class Hand implements Comparable<Hand> {
 		ranks.add(fifthRank);
 	}
 	
+	public Rank getPrimaryRank() {
+		return (ranks.size() == 0 ? Rank.Null : ranks.get(0));
+	}
+	
+	public Rank getSecondaryRank() {
+		return (ranks.size() < 2 ? Rank.Null : ranks.get(1));
+	}
+	
+	public Rank getThirdRank() {
+		return (ranks.size() < 3 ? Rank.Null : ranks.get(2));
+	}
+	
+	public Rank getFourthRank() {
+		return (ranks.size() < 4 ? Rank.Null : ranks.get(3));
+	}
+	
+	public Rank getFifthRank() {
+		return (ranks.size() < 5 ? Rank.Null : ranks.get(4));
+	}
+	
 	public Hand(HandRank handRank, Suit suit, List<Rank> ranks) {
 		this.handRank = handRank;
 		this.suit = suit;
